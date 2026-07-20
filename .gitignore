@@ -1,0 +1,27 @@
+# ── Environment & Secrets ─────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.secret
+
+# ── OS Files ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor / IDE ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Node (if you add any scripts later) ───────────────────────
+node_modules/
+npm-debug.log*
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Backups ───────────────────────────────────────────────────
+*.bak

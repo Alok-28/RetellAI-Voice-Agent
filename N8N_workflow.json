@@ -1,0 +1,806 @@
+﻿{
+    "name":  "QuensultingAI Dental Clinic Booking Workflow",
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "httpMethod":  "POST",
+                                         "path":  "clinic-booking",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.webhook",
+                      "typeVersion":  2.1,
+                      "position":  [
+                                       -1040,
+                                       256
+                                   ],
+                      "id":  "dc5e5617-3d00-4a57-a5d6-d92fa3b27349",
+                      "name":  "Webhook",
+                      "webhookId":  "YOUR_WEBHOOK_ID"
+                  },
+                  {
+                      "parameters":  {
+                                         "sendTo":  "={{$json[\"Email\"]}}",
+                                         "subject":  "Appointment Confirmation",
+                                         "message":  "=\u003ch2\u003eAppointment Confirmed âœ…\u003c/h2\u003e\n\n\u003cp\u003eHello {{$json[\"Patient Name\"]}},\u003c/p\u003e\n\n\u003cp\u003eYour appointment has been successfully booked.\u003c/p\u003e\n\n\u003cul\u003e\n  \u003cli\u003e\u003cstrong\u003eService:\u003c/strong\u003e {{$json[\"Service\"]}}\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eDoctor:\u003c/strong\u003e {{$json[\"Preferred Doctor\"]}}\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eDate:\u003c/strong\u003e {{$json[\"Appointment Date\"]}}\u003c/li\u003e\n  \u003cli\u003e\u003cstrong\u003eTime:\u003c/strong\u003e {{$json[\"Appointment Time\"]}}\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eThank you for choosing QuensultingAI Dental Clinic.\u003c/p\u003e\n\n\u003cp\u003eRegards,\u003cbr\u003eQuensultingAI Dental Clinic\u003c/p\u003e",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.gmail",
+                      "typeVersion":  2.2,
+                      "position":  [
+                                       432,
+                                       272
+                                   ],
+                      "id":  "2a98575d-6a4a-43d9-a381-4ad313a453d8",
+                      "name":  "Send a message",
+                      "webhookId":  "YOUR_WEBHOOK_ID",
+                      "credentials":  {
+                                          "gmailOAuth2":  {
+                                                              "id":  "YOUR_GMAIL_OAUTH2_CREDENTIAL_ID",
+                                                              "name":  "Gmail OAuth2 API"
+                                                          }
+                                      },
+                      "onError":  "continueErrorOutput"
+                  },
+                  {
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "caseSensitive":  true,
+                                                                            "leftValue":  "",
+                                                                            "typeValidation":  "strict",
+                                                                            "version":  3
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "id":  "5ede48da-a08e-491e-94bc-0829621096e8",
+                                                                                   "leftValue":  "={{$json.body.args.patient_name}}",
+                                                                                   "rightValue":  "",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "singleValue":  true
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "0a9b35d1-0b82-49d8-b896-e92e2f0345eb",
+                                                                                   "leftValue":  "={{$json.body.args.phone}}",
+                                                                                   "rightValue":  "",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "singleValue":  true
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "298e8845-c4e5-4789-a0bf-0a2769bd9af8",
+                                                                                   "leftValue":  "={{$json.body.args.email}}",
+                                                                                   "rightValue":  "",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "singleValue":  true
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "b2b0a939-8f0e-44fd-a43f-d7f20697c683",
+                                                                                   "leftValue":  "={{$json.body.args.service}}",
+                                                                                   "rightValue":  "",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "singleValue":  true
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "96b57b9d-7695-421c-a68a-274c04fda288",
+                                                                                   "leftValue":  "={{$json.body.args.appointment_date}}",
+                                                                                   "rightValue":  "",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "singleValue":  true
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "9fdb3840-24f6-4fc6-9adb-082db10cd49d",
+                                                                                   "leftValue":  "={{$json.body.args.appointment_time}}",
+                                                                                   "rightValue":  "",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "singleValue":  true
+                                                                                                }
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "and"
+                                                        },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.if",
+                      "typeVersion":  2.3,
+                      "position":  [
+                                       -848,
+                                       256
+                                   ],
+                      "id":  "80a396db-ef68-4913-a0c1-61da271306c4",
+                      "name":  "If"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "={{$json}}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       288,
+                                       560
+                                   ],
+                      "id":  "12bb8207-3fc9-4ed0-8646-5df2ab1d7910",
+                      "name":  "Respond to Webhook"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "25bdcadc-b834-47e5-a2e8-a38d7be80e8c",
+                                                                                     "name":  "status",
+                                                                                     "value":  "success",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ff20f910-9428-4007-8b42-133bb24c73a4",
+                                                                                     "name":  "message",
+                                                                                     "value":  "Appointment booked successfully",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       656,
+                                       288
+                                   ],
+                      "id":  "dcc93bf2-e811-4e5e-99a4-76639462c6aa",
+                      "name":  "Edit Fields"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "c0f52fe2-cbd7-4cc1-b521-e42a9428e9d9",
+                                                                                     "name":  "status",
+                                                                                     "value":  "failed",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "0c70dff1-60fd-4cf5-ad42-63d764c3938f",
+                                                                                     "name":  "message",
+                                                                                     "value":  "Booking failed please provide necessary information.",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -304,
+                                       544
+                                   ],
+                      "id":  "597e6ca8-ba6e-4cc7-ab63-04ef5e1d6d8a",
+                      "name":  "Edit Fields1"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "={{$json}}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       864,
+                                       304
+                                   ],
+                      "id":  "97c6b62d-e559-41fe-aa87-314699340ae9",
+                      "name":  "Respond to Webhook1"
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "append",
+                                         "documentId":  {
+                                                            "__rl":  true,
+                                                            "value":  "YOUR_GOOGLE_SHEETS_DOCUMENT_ID",
+                                                            "mode":  "list",
+                                                            "cachedResultName":  "Clinic Appointments",
+                                                            "cachedResultUrl":  "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEETS_DOCUMENT_ID/edit"
+                                                        },
+                                         "sheetName":  {
+                                                           "__rl":  true,
+                                                           "value":  "gid=0",
+                                                           "mode":  "list",
+                                                           "cachedResultName":  "Sheet1",
+                                                           "cachedResultUrl":  "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEETS_DOCUMENT_ID/edit#gid=0"
+                                                       },
+                                         "columns":  {
+                                                         "mappingMode":  "defineBelow",
+                                                         "value":  {
+                                                                       "Timestamp":  "={{$now}}",
+                                                                       "Patient Name":  "={{$(\u0027Webhook\u0027).item.json.body.args.patient_name}}",
+                                                                       "Phone":  "={{$(\u0027Webhook\u0027).item.json.body.args.phone}}",
+                                                                       "Email":  "={{$(\u0027Webhook\u0027).item.json.body.args.email}}",
+                                                                       "Service":  "={{$(\u0027Webhook\u0027).item.json.body.args.service}}",
+                                                                       "Preferred Doctor":  "={{$(\u0027Webhook\u0027).item.json.body.args.preferred_doctor}}",
+                                                                       "Appointment Date":  "={{$(\u0027Webhook\u0027).item.json.body.args.appointment_date}}",
+                                                                       "Appointment Time":  "={{$(\u0027Webhook\u0027).item.json.body.args.appointment_time}}",
+                                                                       "Status":  "Booked",
+                                                                       "Call ID":  "={{$(\u0027Webhook\u0027).item.json.body.call.call_id}}"
+                                                                   },
+                                                         "matchingColumns":  [
+
+                                                                             ],
+                                                         "schema":  [
+                                                                        {
+                                                                            "id":  "Timestamp",
+                                                                            "displayName":  "Timestamp",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Patient Name",
+                                                                            "displayName":  "Patient Name",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Phone",
+                                                                            "displayName":  "Phone",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Email",
+                                                                            "displayName":  "Email",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Service",
+                                                                            "displayName":  "Service",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Preferred Doctor",
+                                                                            "displayName":  "Preferred Doctor",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Appointment Date",
+                                                                            "displayName":  "Appointment Date",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Appointment Time",
+                                                                            "displayName":  "Appointment Time",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Status",
+                                                                            "displayName":  "Status",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Call ID",
+                                                                            "displayName":  "Call ID",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        },
+                                                                        {
+                                                                            "id":  "Notes",
+                                                                            "displayName":  "Notes",
+                                                                            "required":  false,
+                                                                            "defaultMatch":  false,
+                                                                            "display":  true,
+                                                                            "type":  "string",
+                                                                            "canBeUsedToMatch":  true
+                                                                        }
+                                                                    ],
+                                                         "attemptToConvertTypes":  false,
+                                                         "convertFieldsToString":  false
+                                                     },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.googleSheets",
+                      "typeVersion":  4.7,
+                      "position":  [
+                                       288,
+                                       -128
+                                   ],
+                      "id":  "34a04482-3916-41a7-b52b-0e57c31d982a",
+                      "name":  "Append row in sheet",
+                      "credentials":  {
+                                          "googleSheetsOAuth2Api":  {
+                                                                        "id":  "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+                                                                        "name":  "Google Sheets OAuth2 API"
+                                                                    }
+                                      },
+                      "onError":  "continueErrorOutput"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "a1a1a1a1-0000-0000-0000-000000000001",
+                                                                                     "name":  "slotStart",
+                                                                                     "value":  "={{ DateTime.fromFormat($json.body.args.appointment_date + \u0027 \u0027 + $json.body.args.appointment_time, \u0027yyyy-MM-dd HH:mm\u0027).toISO() }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "a1a1a1a1-0000-0000-0000-000000000002",
+                                                                                     "name":  "slotEnd",
+                                                                                     "value":  "={{ DateTime.fromFormat($json.body.args.appointment_date + \u0027 \u0027 + $json.body.args.appointment_time, \u0027yyyy-MM-dd HH:mm\u0027).plus({minutes: 30}).toISO() }}",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -736,
+                                       0
+                                   ],
+                      "id":  "0d8a3ed4-8b15-409a-a3c6-ecdec97462dc",
+                      "name":  "Compute Slot Times"
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "getAll",
+                                         "calendar":  {
+                                                          "__rl":  true,
+                                                          "value":  "YOUR_GOOGLE_CALENDAR_ID@group.calendar.google.com",
+                                                          "mode":  "id"
+                                                      },
+                                         "limit":  5,
+                                         "timeMin":  "={{ $(\u0027Compute Slot Times\u0027).item.json.slotStart }}",
+                                         "timeMax":  "={{ $(\u0027Compute Slot Times\u0027).item.json.slotEnd }}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.googleCalendar",
+                      "typeVersion":  1.3,
+                      "position":  [
+                                       -544,
+                                       -16
+                                   ],
+                      "id":  "e5eb23b0-f66b-4b81-9b24-e83be7a73003",
+                      "name":  "Check Calendar Availability",
+                      "alwaysOutputData":  true,
+                      "credentials":  {
+                                          "googleCalendarOAuth2Api":  {
+                                                                          "id":  "YOUR_GOOGLE_CALENDAR_CREDENTIAL_ID",
+                                                                          "name":  "Google Calendar OAuth2 API"
+                                                                      }
+                                      },
+                      "onError":  "continueErrorOutput"
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const items = $input.all();\nconst hasConflict = items.some(item =\u003e item.json \u0026\u0026 item.json.id);\nreturn [{ json: { slotAvailable: !hasConflict } }];"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -336,
+                                       -192
+                                   ],
+                      "id":  "efc99d99-f24f-4bd1-bea8-dbf2647f15a5",
+                      "name":  "Evaluate Slot Availability"
+                  },
+                  {
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "caseSensitive":  true,
+                                                                            "leftValue":  "",
+                                                                            "typeValidation":  "strict",
+                                                                            "version":  3
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "id":  "c2c2c2c2-0000-0000-0000-000000000001",
+                                                                                   "leftValue":  "={{$json.slotAvailable}}",
+                                                                                   "rightValue":  true,
+                                                                                   "operator":  {
+                                                                                                    "type":  "boolean",
+                                                                                                    "operation":  "true",
+                                                                                                    "singleValue":  true
+                                                                                                }
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "and"
+                                                        },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.if",
+                      "typeVersion":  2.3,
+                      "position":  [
+                                       -160,
+                                       -48
+                                   ],
+                      "id":  "d45e47f9-cadb-4395-9661-18c2d650223a",
+                      "name":  "If Slot Available"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "d1d1d1d1-0000-0000-0000-000000000001",
+                                                                                     "name":  "status",
+                                                                                     "value":  "failed",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "d1d1d1d1-0000-0000-0000-000000000002",
+                                                                                     "name":  "message",
+                                                                                     "value":  "That slot is already booked. Please choose a different date or time.",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -64,
+                                       368
+                                   ],
+                      "id":  "9dd57431-90a1-4602-a35b-7083e03841c6",
+                      "name":  "Edit Fields - Slot Taken"
+                  },
+                  {
+                      "parameters":  {
+                                         "calendar":  {
+                                                          "__rl":  true,
+                                                          "value":  "YOUR_GOOGLE_CALENDAR_ID@group.calendar.google.com",
+                                                          "mode":  "id"
+                                                      },
+                                         "start":  "={{$(\u0027Compute Slot Times\u0027).item.json.slotStart}}",
+                                         "end":  "={{$(\u0027Compute Slot Times\u0027).item.json.slotEnd}}",
+                                         "additionalFields":  {
+                                                                  "attendees":  [
+                                                                                    "={{$(\u0027Webhook\u0027).item.json.body.args.email}}"
+                                                                                ],
+                                                                  "description":  "=Patient: {{$(\u0027Webhook\u0027).item.json.body.args.patient_name}}\nPhone: {{$(\u0027Webhook\u0027).item.json.body.args.phone}}\nService: {{$(\u0027Webhook\u0027).item.json.body.args.service}}\nDoctor: {{$(\u0027Webhook\u0027).item.json.body.args.preferred_doctor}}\nCall ID: {{$(\u0027Webhook\u0027).item.json.body.call.call_id}}",
+                                                                  "sendUpdates":  "all",
+                                                                  "summary":  "={{$(\u0027Webhook\u0027).item.json.body.args.service}} - {{$(\u0027Webhook\u0027).item.json.body.args.patient_name}}"
+                                                              }
+                                     },
+                      "type":  "n8n-nodes-base.googleCalendar",
+                      "typeVersion":  1.3,
+                      "position":  [
+                                       64,
+                                       -112
+                                   ],
+                      "id":  "f8c5a771-f14e-49ab-b778-6c24e3394297",
+                      "name":  "Create Calendar Event",
+                      "credentials":  {
+                                          "googleCalendarOAuth2Api":  {
+                                                                          "id":  "YOUR_GOOGLE_CALENDAR_CREDENTIAL_ID",
+                                                                          "name":  "Google Calendar OAuth2 API"
+                                                                      }
+                                      },
+                      "onError":  "continueErrorOutput"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "e1e1e1e1-0000-0000-0000-000000000001",
+                                                                                     "name":  "status",
+                                                                                     "value":  "failed",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "e1e1e1e1-0000-0000-0000-000000000002",
+                                                                                     "name":  "message",
+                                                                                     "value":  "We hit a technical issue while booking. Please try again in a moment, or ask to speak with our receptionist.",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       768,
+                                       0
+                                   ],
+                      "id":  "4016111c-6a99-4c7b-86ac-8fe5db43c863",
+                      "name":  "Edit Fields - System Error"
+                  }
+              ],
+    "pinData":  {
+
+                },
+    "connections":  {
+                        "Webhook":  {
+                                        "main":  [
+                                                     [
+                                                         {
+                                                             "node":  "If",
+                                                             "type":  "main",
+                                                             "index":  0
+                                                         }
+                                                     ]
+                                                 ]
+                                    },
+                        "Send a message":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "Edit Fields",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ],
+                                                            [
+                                                                {
+                                                                    "node":  "Edit Fields - System Error",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           },
+                        "If":  {
+                                   "main":  [
+                                                [
+                                                    {
+                                                        "node":  "Compute Slot Times",
+                                                        "type":  "main",
+                                                        "index":  0
+                                                    }
+                                                ],
+                                                [
+                                                    {
+                                                        "node":  "Edit Fields1",
+                                                        "type":  "main",
+                                                        "index":  0
+                                                    }
+                                                ]
+                                            ]
+                               },
+                        "Edit Fields":  {
+                                            "main":  [
+                                                         [
+                                                             {
+                                                                 "node":  "Respond to Webhook1",
+                                                                 "type":  "main",
+                                                                 "index":  0
+                                                             }
+                                                         ]
+                                                     ]
+                                        },
+                        "Edit Fields1":  {
+                                             "main":  [
+                                                          [
+                                                              {
+                                                                  "node":  "Respond to Webhook",
+                                                                  "type":  "main",
+                                                                  "index":  0
+                                                              }
+                                                          ]
+                                                      ]
+                                         },
+                        "Append row in sheet":  {
+                                                    "main":  [
+                                                                 [
+                                                                     {
+                                                                         "node":  "Send a message",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ],
+                                                                 [
+                                                                     {
+                                                                         "node":  "Edit Fields - System Error",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ]
+                                                             ]
+                                                },
+                        "Compute Slot Times":  {
+                                                   "main":  [
+                                                                [
+                                                                    {
+                                                                        "node":  "Check Calendar Availability",
+                                                                        "type":  "main",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                            ]
+                                               },
+                        "Check Calendar Availability":  {
+                                                            "main":  [
+                                                                         [
+                                                                             {
+                                                                                 "node":  "Evaluate Slot Availability",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ],
+                                                                         [
+                                                                             {
+                                                                                 "node":  "Edit Fields - System Error",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ]
+                                                                     ]
+                                                        },
+                        "Evaluate Slot Availability":  {
+                                                           "main":  [
+                                                                        [
+                                                                            {
+                                                                                "node":  "If Slot Available",
+                                                                                "type":  "main",
+                                                                                "index":  0
+                                                                            }
+                                                                        ]
+                                                                    ]
+                                                       },
+                        "If Slot Available":  {
+                                                  "main":  [
+                                                               [
+                                                                   {
+                                                                       "node":  "Create Calendar Event",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   }
+                                                               ],
+                                                               [
+                                                                   {
+                                                                       "node":  "Edit Fields - Slot Taken",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   }
+                                                               ]
+                                                           ]
+                                              },
+                        "Edit Fields - Slot Taken":  {
+                                                         "main":  [
+                                                                      [
+                                                                          {
+                                                                              "node":  "Respond to Webhook",
+                                                                              "type":  "main",
+                                                                              "index":  0
+                                                                          }
+                                                                      ]
+                                                                  ]
+                                                     },
+                        "Create Calendar Event":  {
+                                                      "main":  [
+                                                                   [
+                                                                       {
+                                                                           "node":  "Append row in sheet",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ],
+                                                                   [
+                                                                       {
+                                                                           "node":  "Edit Fields - System Error",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
+                                                               ]
+                                                  },
+                        "Edit Fields - System Error":  {
+                                                           "main":  [
+                                                                        [
+                                                                            {
+                                                                                "node":  "Respond to Webhook",
+                                                                                "type":  "main",
+                                                                                "index":  0
+                                                                            }
+                                                                        ]
+                                                                    ]
+                                                       }
+                    },
+    "active":  true,
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate",
+                     "availableInMCP":  false
+                 },
+    "versionId":  "YOUR_VERSION_ID",
+    "meta":  {
+                 "templateCredsSetupCompleted":  true,
+                 "instanceId":  "YOUR_N8N_INSTANCE_ID"
+             },
+    "nodeGroups":  [
+
+                   ],
+    "id":  "YOUR_WORKFLOW_ID",
+    "tags":  [
+
+             ]
+}

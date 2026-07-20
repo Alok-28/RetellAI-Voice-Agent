@@ -1,0 +1,551 @@
+﻿{
+    "agent_id":  "",
+    "channel":  "voice",
+    "last_modification_timestamp":  1783071208859,
+    "agent_name":  "QuensultingAI Dental Receptionist",
+    "version_description":  "",
+    "response_engine":  {
+                            "type":  "conversation-flow",
+                            "version":  5,
+                            "conversation_flow_id":  "YOUR_CONVERSATION_FLOW_ID"
+                        },
+    "language":  "en-US",
+    "data_storage_setting":  "everything",
+    "opt_in_signed_url":  false,
+    "version":  5,
+    "base_version":  4,
+    "assigned_tags":  [
+
+                      ],
+    "is_published":  false,
+    "version_title":  "",
+    "post_call_analysis_model":  "gpt-4.1",
+    "pii_config":  {
+                       "mode":  "post_call",
+                       "categories":  [
+
+                                      ]
+                   },
+    "handbook_config":  {
+                            "default_personality":  true,
+                            "ai_disclosure":  true
+                        },
+    "voice_id":  "retell-Kate",
+    "fallback_voice_ids":  [
+
+                           ],
+    "voice_temperature":  1,
+    "voice_speed":  1,
+    "volume":  1,
+    "enable_expressive_mode":  false,
+    "max_call_duration_ms":  3600000,
+    "interruption_sensitivity":  0.9,
+    "allow_user_dtmf":  true,
+    "user_dtmf_options":  {
+
+                          },
+    "conversationFlow":  {
+                             "conversation_flow_id":  "YOUR_CONVERSATION_FLOW_ID",
+                             "version":  5,
+                             "last_modification_timestamp":  1783071208849,
+                             "global_prompt":  "You are the AI receptionist for QuensultingAI Dental Clinic.\n\nYour responsibilities are:\n- Greet callers warmly.\n- Help patients book dental appointments.\n- Answer common questions about the clinic.\n- Handle emergency dental situations.\n- Provide the receptionist\u0027s direct phone number when a caller wants to speak to a human.\n\nClinic Information:\n- Working Hours: Monday to Saturday, 9:00 AM – 6:00 PM\n- Closed on Sunday\n- Services:\n  - Dental Cleaning\n  - Root Canal Treatment\n  - Teeth Whitening\n  - Braces Consultation\n  - Tooth Extraction\n  - General Dental Consultation\n- Consultation Fee: ₹500\n- Payment Methods: Cash, Card, UPI\n- Walk-ins are accepted based on availability.\n- Parking: Free parking is available at the clinic.\n- Pediatric Dentistry: We treat patients of all ages, including children.\n- First Visit Requirements: First-time patients should bring a valid ID proof and any previous dental records or X-rays, if available.\n- Insurance: We do not directly process dental insurance claims at the moment; payment is collected via Cash, Card, or UPI, and patients may claim reimbursement from their insurer separately.\n\nGuidelines:\n- Be polite, calm and professional.\n- Ask one question at a time by default, but if the caller volunteers multiple pieces of information in a single reply (e.g. name, date, and time all together), acknowledge and accept all of it at once instead of re-asking for details already given. Never make the caller repeat information they\u0027ve already provided.\n- Confirm important details before booking.\n- Never invent appointment availability.\n- If the caller requests a human, provide them the receptionist\u0027s direct phone number (+91 XXXXX XXXXX) instead of transferring the call.\n- If the caller reports severe pain, bleeding, swelling, trauma or another emergency, recommend visiting the clinic immediately or the nearest emergency dental service and provide the receptionist\u0027s direct phone number so they can call immediately.\n- When collecting appointment date and time, always internally convert them to YYYY-MM-DD and 24-hour HH:MM format before calling the booking function, regardless of how the caller phrases them (e.g. \"next Tuesday\" or \"2:30 in the afternoon\"). Never expose this internal format conversion to the caller — speak dates and times back to them naturally.\n- Always use the current date and time provided by the system as the reference point for resolving relative dates like \"today\", \"tomorrow\", or \"next Monday.\" Never assume or default to a fixed year — always calculate relative dates based on the actual current date at the time of the call. If you are ever unsure of the current date, ask the caller to confirm the full date including the year before booking.\nConversation Quality:\n- Listen carefully and understand the caller\u0027s full response before replying, even if they provide several details together or phrase things indirectly.\n- Keep responses warm, concise, and natural — avoid sounding robotic or overly scripted.\n- Show empathy for anxious or first-time patients, and reassure nervous callers briefly when appropriate.\n- Avoid repeating information the caller has already given, and avoid unnecessary confirmations that slow down the conversation.\n- Always end every call on a warm, friendly, appreciative note — thank the caller by name if known, wish them well, and mention you look forward to seeing them (if an appointment was booked) before ending the call.\n- Prioritize making the caller feel heard, cared for, and confident that their dental needs are being handled smoothly from start to finish.\n\nLanguage Handling:\n- You are able to converse fluently in English and Hindi.\n- At the very start of the call, explicitly ask the caller to choose English or Hindi. Once they choose, continue the ENTIRE rest of the conversation strictly in that chosen language, for every node, until the call ends.\n- If the caller switches languages mid-call, switch with them naturally.\n- If the caller\u0027s initial response to the language question is unclear, ask once more before defaulting to English. Do not switch languages mid-call unless the caller explicitly asks to switch.\n- Maintain the same warmth, clarity, and professionalism in every language — do not sound like a literal translation.\n\nInterruption Handling:\n- If the caller interrupts you mid-sentence, stop talking immediately and listen to what they\u0027re saying — never talk over them or finish your original sentence afterward.\n- After an interruption, respond directly to what the caller just said rather than repeating what you were about to say before being interrupted.\n- If the caller\u0027s interruption changes the topic (e.g. they interrupt a booking question to ask about pricing), address the new topic first, then naturally return to where you left off (\"Sure, the consultation fee is ₹500. Now, back to your appointment — what date works for you?\").\n- Never scold, comment on, or apologize excessively for being interrupted — treat it as a normal part of conversation.\n\nFallback Scenarios:\n- If you don\u0027t understand what the caller said, ask them to repeat or rephrase once, politely (\"Sorry, could you say that again?\") — do not guess or proceed with incomplete information.\n- If you fail to understand the same input twice in a row, stop trying to extract that detail by voice and offer an alternative: for phone/email, offer to have the receptionist confirm it later, or ask the caller to spell it out slowly letter by letter.\n- If the caller goes silent for an extended period, gently check in once (\"Are you still there?\") before ending the call politely if there\u0027s no response.\n- If the caller asks something completely outside clinic-related topics (e.g. unrelated general questions), politely redirect: \"I\u0027m only able to help with QuensultingAI Dental Clinic related questions — is there anything dental-related I can help you with?\"\n- If a technical error occurs during booking (the booking function fails or returns an error), never expose technical details, error codes, or system language to the caller. Instead say something like: \"I\u0027m having a little trouble completing that booking right now. Let me try again,\" and retry once automatically. If it fails a second time, apologize, provide the receptionist\u0027s direct phone number, and end the call gracefully rather than looping indefinitely.\n- If the caller becomes frustrated or upset, acknowledge their frustration calmly and sincerely before proceeding (\"I completely understand the frustration, let me help sort this out\"), and prioritize resolving their core need over following the script rigidly.\n- Never leave a caller in silence for more than a couple seconds without acknowledgment — if you need a moment (e.g. while a function call is processing), say so naturally (\"One moment while I check that for you\").\n",
+                             "nodes":  [
+                                           {
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "Greet the caller warmly: \"Hello! Thank you for calling QuensultingAI Dental Clinic. नमस्ते! क्युएनसल्टिंग एआई डेंटल क्लिनिक में कॉल करने के लिए धन्यवाद।\" Then ask: \"Would you like to continue in English, or Hindi? / क्या आप अंग्रेज़ी में बात करना चाहेंगे, या हिंदी में?\" Wait for the caller\u0027s response before proceeding."
+                                                               },
+                                               "name":  "Greeting",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-language-select",
+                                                                 "id":  "edge-greeting-to-language",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller has responded, indicating a language preference or has started speaking."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "start_speaker":  "agent",
+                                               "id":  "start-node-1782909437510",
+                                               "type":  "conversation",
+                                               "display_position":  {
+                                                                        "x":  294,
+                                                                        "y":  438
+                                                                    }
+                                           },
+                                           {
+                                               "name":  "End Call",
+                                               "id":  "end-call-node-1782909437510",
+                                               "type":  "end",
+                                               "display_position":  {
+                                                                        "x":  2862,
+                                                                        "y":  438
+                                                                    },
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "Politely end the call"
+                                                               }
+                                           },
+                                           {
+                                               "name":  "Book Appointment",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-1782909860376",
+                                                                 "id":  "edge-1782911373987-l5419vrrz",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "All required appointment details have been collected and confirmed."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "id":  "node-1782909722471",
+                                               "type":  "conversation",
+                                               "display_position":  {
+                                                                        "x":  678,
+                                                                        "y":  438
+                                                                    },
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "The caller wants to book a dental appointment.\n\nCollect the following information naturally, asking one question at a time:\n\n1. Full name\n2. Phone number\n3. Email address\n4. Required dental service\n5. Preferred doctor (optional)\n6. Preferred appointment date\n7. Preferred appointment time\n\nDo not ask all questions at once.\n\nAfter collecting every detail, read them back to the caller for confirmation and ask:\n\n\"Is this information correct?\"\n\nIf the caller confirms, proceed to the booking function.\n\nIf the caller wants to change any detail, update it before continuing."
+                                                               }
+                                           },
+                                           {
+                                               "variables":  [
+                                                                 {
+                                                                     "name":  "patient_name",
+                                                                     "type":  "string",
+                                                                     "description":  "Name of the patient. Always write it in English/Latin script (Roman letters), even if the caller spoke their name in Hindi or another language — transliterate it phonetically into Latin letters (e.g. if spoken as \u0027राहुल शर्मा\u0027, extract as \u0027Rahul Sharma\u0027). Never output Devanagari or non-Latin script."
+                                                                 },
+                                                                 {
+                                                                     "name":  "phone",
+                                                                     "type":  "string",
+                                                                     "description":  "The caller\u0027s phone number, collected verbally during the conversation."
+                                                                 },
+                                                                 {
+                                                                     "name":  "email",
+                                                                     "type":  "string",
+                                                                     "description":  "Extract the user\u0027s email address. Always write it in standard Latin-character email format (e.g. name@example.com), spelling it out correctly even if the caller dictated letters/words in Hindi."
+                                                                 },
+                                                                 {
+                                                                     "name":  "service",
+                                                                     "type":  "string",
+                                                                     "description":  "extract the service from usser conversation"
+                                                                 },
+                                                                 {
+                                                                     "name":  "preferred_doctor",
+                                                                     "type":  "string",
+                                                                     "description":  "extract the preferred doctor from the conversation"
+                                                                 },
+                                                                 {
+                                                                     "name":  "appointment_date",
+                                                                     "type":  "string",
+                                                                     "description":  "Extract the appointment date and convert to YYYY-MM-DD format"
+                                                                 },
+                                                                 {
+                                                                     "name":  "appointment_time",
+                                                                     "type":  "string",
+                                                                     "description":  "Extract the appointment time and convert to 24-hour HH:MM format"
+                                                                 }
+                                                             ],
+                                               "else_edge":  {
+                                                                 "id":  "node-1782909860376-else-edge",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "Else"
+                                                                                          }
+                                                             },
+                                               "name":  "Extract Variables",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-1782910937707",
+                                                                 "id":  "edge-1782911426824-o8xcibu0h",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "All required booking information has been collected."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "enable_typing_sound":  false,
+                                               "id":  "node-1782909860376",
+                                               "type":  "extract_dynamic_variables",
+                                               "display_position":  {
+                                                                        "x":  1134,
+                                                                        "y":  438
+                                                                    }
+                                           },
+                                           {
+                                               "tool_id":  "tool-1782910934662",
+                                               "name":  "Book Appointment",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-1782910963533",
+                                                                 "id":  "edge-1782911457856-4lkw5vbyu",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The booking function has finished executing."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "enable_typing_sound":  false,
+                                               "id":  "node-1782910937707",
+                                               "type":  "function",
+                                               "tool_type":  "local",
+                                               "speak_during_execution":  false,
+                                               "display_position":  {
+                                                                        "x":  1542,
+                                                                        "y":  558
+                                                                    },
+                                               "wait_for_result":  true
+                                           },
+                                           {
+                                               "name":  "Logic Split",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-1782923424654",
+                                                                 "id":  "edge-1782923224012-brmpyggjy",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The appointment booking was successful."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "node-1782923424654",
+                                                                 "id":  "edge-1782923237643-j8bo1de12",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "equation",
+                                                                                              "equations":  [
+                                                                                                                {
+                                                                                                                    "left":  "booking_status",
+                                                                                                                    "operator":  "==",
+                                                                                                                    "right":  "success"
+                                                                                                                }
+                                                                                                            ],
+                                                                                              "operator":  "||"
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "node-1782923557953",
+                                                                 "id":  "edge-1782923494490-iomuixipu",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The appointment booking failed."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "node-1782923557953",
+                                                                 "id":  "edge-1782923502738-uzlm9vtba",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "equation",
+                                                                                              "equations":  [
+                                                                                                                {
+                                                                                                                    "left":  "booking_status",
+                                                                                                                    "operator":  "==",
+                                                                                                                    "right":  "failed"
+                                                                                                                }
+                                                                                                            ],
+                                                                                              "operator":  "||"
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "id":  "node-1782910963533",
+                                               "else_edge":  {
+                                                                 "id":  "edge-1782910963533-4zqhxn218",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "Else"
+                                                                                          }
+                                                             },
+                                               "type":  "branch",
+                                               "display_position":  {
+                                                                        "x":  1950,
+                                                                        "y":  558
+                                                                    }
+                                           },
+                                           {
+                                               "name":  "Booking Successful",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "end-call-node-1782909437510",
+                                                                 "id":  "edge-1782929310665-q3n3u4a4i",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "End"
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "id":  "node-1782923424654",
+                                               "type":  "conversation",
+                                               "display_position":  {
+                                                                        "x":  2334,
+                                                                        "y":  270
+                                                                    },
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "Great! Your appointment has been booked successfully.\n\nIs there anything else I can help you with today?"
+                                                               }
+                                           },
+                                           {
+                                               "name":  "Booking Failed",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-1782909722471",
+                                                                 "id":  "edge-retry-booking",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "This is the first booking failure for this call, and a retry should be attempted."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "end-call-node-1782909437510",
+                                                                 "id":  "edge-fail-to-endcall",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "This is the second consecutive booking failure for this call, and the caller has been given the receptionist\u0027s number instead of retrying again."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "id":  "node-1782923557953",
+                                               "type":  "conversation",
+                                               "display_position":  {
+                                                                        "x":  2334,
+                                                                        "y":  558
+                                                                    },
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "The booking attempt failed. This is tracked internally as a retry count.\n\nIf this is the FIRST failure for this caller: say naturally, \"I\u0027m having a little trouble completing that booking — let me try that again for you,\" then retry the booking with the same details (or ask to confirm/correct one specific detail if the error suggests something was invalid, e.g. an unclear date).\n\nIf this is the SECOND consecutive failure for this caller: do NOT retry again. Instead say: \"I\u0027m really sorry, I\u0027m having trouble completing this booking right now. Let me give you our receptionist\u0027s direct number so they can assist you personally: +91 XXXXX XXXXX.\" Then end the call warmly.\n\nNever expose technical error codes, system messages, or the raw {{booking_message}} content to the caller — always translate failures into plain, reassuring language."
+                                                               }
+                                           },
+                                           {
+                                               "name":  "FAQ",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-1782909722471",
+                                                                 "id":  "edge-faq-to-booking",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller wants to book an appointment."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "end-call-node-1782909437510",
+                                                                 "id":  "edge-faq-to-end",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller has no further questions and is ready to end the call."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "id":  "node-faq",
+                                               "type":  "conversation",
+                                               "display_position":  {
+                                                                        "x":  918,
+                                                                        "y":  966
+                                                                    },
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "Answer the caller\u0027s question using only the clinic information provided in the global prompt (hours, services, consultation fee, payment methods, walk-in policy, parking, pediatric dentistry, first-visit requirements, and insurance policy). Be concise and friendly. If asked about something not covered in the clinic information, politely say you\u0027re not certain and offer to have the receptionist confirm it. After answering, ask if they\u0027d like to book an appointment or if there\u0027s anything else you can help with."
+                                                               }
+                                           },
+                                           {
+                                               "name":  "Emergency Triage",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-transfer-human",
+                                                                 "id":  "edge-emergency-to-transfer",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller agrees to be transferred to a human receptionist."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "end-call-node-1782909437510",
+                                                                 "id":  "edge-emergency-to-end",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller declines transfer and is ready to end the call."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "id":  "node-emergency-triage",
+                                               "type":  "conversation",
+                                               "display_position":  {
+                                                                        "x":  726,
+                                                                        "y":  -90
+                                                                    },
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "The caller has described a dental emergency (severe pain, heavy bleeding, swelling, or trauma).\n\nStay calm and reassuring. Do not attempt to diagnose or give clinical advice.\n\nTell the caller to:\n- Visit QuensultingAI Dental Clinic immediately if within working hours, or\n- Go to the nearest emergency dental/medical service if it\u0027s urgent and the clinic is closed.\n\nThen ask: \"Would you like me to transfer you to our receptionist right now for immediate assistance?\""
+                                                               }
+                                           },
+                                           {
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "Let the caller know that live call transfer isn\u0027t available right now, and instead provide them our receptionist\u0027s direct phone number, +91 XXXXX XXXXX, clearly and slowly. Ask if they would like anything else before ending the call."
+                                                               },
+                                               "name":  "Provide Receptionist Number",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "end-call-node-1782909437510",
+                                                                 "id":  "edge-provide-number-to-end",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller has no further questions and is ready to end the call."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "start-node-1782909437510",
+                                                                 "id":  "edge-provide-number-to-greeting",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller wants to book an appointment, ask another question, or needs further help."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "start_speaker":  "agent",
+                                               "id":  "node-transfer-human",
+                                               "type":  "conversation",
+                                               "display_position":  {
+                                                                        "x":  1494,
+                                                                        "y":  30
+                                                                    }
+                                           },
+                                           {
+                                               "instruction":  {
+                                                                   "type":  "prompt",
+                                                                   "text":  "Determine the caller\u0027s language preference from their last response. If they said \u0027Hindi\u0027 or replied in Hindi, confirm you will continue in Hindi and proceed entirely in Hindi from now on. If they said \u0027English\u0027 or replied in English, confirm you will continue in English and proceed entirely in English from now on. If unclear, politely ask once more: \"Sorry, English or Hindi? / माफ़ कीजिए, अंग्रेज़ी या हिंदी?\" Once determined, ask how you can help: booking an appointment, answering a question, or connecting with the receptionist — in the chosen language."
+                                                               },
+                                               "name":  "Select Language",
+                                               "edges":  [
+                                                             {
+                                                                 "destination_node_id":  "node-1782909722471",
+                                                                 "id":  "edge-lang-to-booking",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller wants to book, schedule, or make an appointment."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "node-emergency-triage",
+                                                                 "id":  "edge-lang-to-emergency",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller describes a dental emergency such as severe pain, heavy bleeding, swelling, or trauma."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "node-transfer-human",
+                                                                 "id":  "edge-lang-to-transfer",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller explicitly asks to speak with a human or receptionist."
+                                                                                          }
+                                                             },
+                                                             {
+                                                                 "destination_node_id":  "node-faq",
+                                                                 "id":  "edge-lang-to-faq",
+                                                                 "transition_condition":  {
+                                                                                              "type":  "prompt",
+                                                                                              "prompt":  "The caller is asking a general question about the clinic (hours, fees, location, payment methods, walk-ins) rather than booking."
+                                                                                          }
+                                                             }
+                                                         ],
+                                               "start_speaker":  "agent",
+                                               "id":  "node-language-select",
+                                               "type":  "conversation",
+                                               "display_position":  {
+                                                                        "x":  500,
+                                                                        "y":  438
+                                                                    }
+                                           }
+                                       ],
+                             "start_node_id":  "start-node-1782909437510",
+                             "start_speaker":  "agent",
+                             "tools":  [
+                                           {
+                                               "headers":  {
+                                                               "Content-Type":  "application/json"
+                                                           },
+                                               "parameter_type":  "form",
+                                               "method":  "POST",
+                                               "query_params":  {
+
+                                                                },
+                                               "description":  "Books a dental appointment by sending the patient\u0027s details to the clinic\u0027s booking system.\n\nUse this function only after confirming all required information with the caller.\n\nRequired information:\n- Patient name\n- Phone number\n- Email address\n- Dental service\n- Appointment date\n- Appointment time\n\nPreferred doctor is optional.",
+                                               "enable_typing_sound":  false,
+                                               "type":  "custom",
+                                               "url":  "https://YOUR_N8N_INSTANCE.app.n8n.cloud/webhook/clinic-booking",
+                                               "tool_id":  "tool-1782910934662",
+                                               "args_at_root":  false,
+                                               "timeout_ms":  120000,
+                                               "speak_after_execution":  true,
+                                               "name":  "book_appointment",
+                                               "response_variables":  {
+                                                                          "message":  "booking_message",
+                                                                          "status":  "booking_status"
+                                                                      },
+                                               "speak_during_execution":  false,
+                                               "parameters":  {
+                                                                  "type":  "object",
+                                                                  "required":  [
+                                                                                   "patient_name",
+                                                                                   "phone",
+                                                                                   "email",
+                                                                                   "service",
+                                                                                   "appointment_date",
+                                                                                   "appointment_time"
+                                                                               ],
+                                                                  "properties":  {
+                                                                                     "appointment_time":  {
+                                                                                                              "type":  "string",
+                                                                                                              "description":  "The appointment time in strict 24-hour format HH:MM (e.g. 14:30 for 2:30 PM). Always convert spoken times like \"2:30 in the afternoon\" into this exact 24-hour format before filling this field."
+                                                                                                          },
+                                                                                     "phone":  {
+                                                                                                   "type":  "string",
+                                                                                                   "description":  ""
+                                                                                               },
+                                                                                     "service":  {
+                                                                                                     "type":  "string",
+                                                                                                     "description":  ""
+                                                                                                 },
+                                                                                     "patient_name":  {
+                                                                                                          "type":  "string",
+                                                                                                          "description":  ""
+                                                                                                      },
+                                                                                     "appointment_date":  {
+                                                                                                              "type":  "string",
+                                                                                                              "description":  "The appointment date in strict format YYYY-MM-DD (e.g. 2026-07-15). Always convert relative dates like \"tomorrow\" or \"next Tuesday\" into this exact format based on today\u0027s date before filling this field."
+                                                                                                          },
+                                                                                     "email":  {
+                                                                                                   "type":  "string",
+                                                                                                   "description":  ""
+                                                                                               },
+                                                                                     "preferred_doctor":  {
+                                                                                                              "type":  "string",
+                                                                                                              "description":  ""
+                                                                                                          }
+                                                                                 }
+                                                              }
+                                           }
+                                       ],
+                             "model_choice":  {
+                                                  "type":  "cascading",
+                                                  "model":  "claude-4.6-sonnet",
+                                                  "high_priority":  false
+                                              },
+                             "tool_call_strict_mode":  true,
+                             "knowledge_base_ids":  [
+
+                                                    ],
+                             "kb_config":  {
+                                               "top_k":  3,
+                                               "filter_score":  0.6
+                                           },
+                             "begin_tag_display_position":  {
+                                                                "x":  122,
+                                                                "y":  333
+                                                            },
+                             "is_published":  false,
+                             "is_transfer_cf":  false
+                         }
+}
