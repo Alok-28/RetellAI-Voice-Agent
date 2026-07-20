@@ -41,6 +41,8 @@ Caller (Phone)
 │  3. Check Google Calendar            │
 │  4. Evaluate slot availability       │
 │       ├─ Slot Free → Create Event   │
+│       │    ├─ WhatsApp alert        │
+│       │    │   (to receptionist)    │
 │       │    ├─ Append to Sheets      │
 │       │    ├─ Send Gmail confirm    │
 │       │    └─ Return success        │
@@ -72,6 +74,7 @@ QuensultingAI Agent/
 | 📅 Availability Check | Real-time Google Calendar conflict detection |
 | 📊 Data Logging | Auto-appends to Google Sheets with Timestamp, Patient, Doctor, Call ID |
 | 📧 Email Confirmation | HTML appointment confirmation via Gmail OAuth2 |
+| 💬 WhatsApp Alert | Instant WhatsApp notification to the receptionist on every new booking |
 | 🔄 Retry Logic | 1 automatic retry on booking failure; graceful fallback to human receptionist |
 | 🚨 Emergency Triage | Detects emergencies and routes caller to immediate help |
 | 🧠 Smart Extraction | Converts spoken dates/times (e.g., "next Tuesday at 2:30 PM") to ISO format |
@@ -135,7 +138,10 @@ All sensitive values must be stored as environment variables or inside your n8n 
 | `GMAIL_OAUTH2_CREDENTIAL_ID` | n8n credential ID for Gmail OAuth2 |
 | `GOOGLE_SHEETS_OAUTH2_CREDENTIAL_ID` | n8n credential ID for Google Sheets OAuth2 |
 | `GOOGLE_CALENDAR_OAUTH2_CREDENTIAL_ID` | n8n credential ID for Google Calendar OAuth2 |
-| `RECEPTIONIST_PHONE` | Clinic receptionist's direct phone number |
+| `WHATSAPP_CREDENTIAL_ID` | n8n credential ID for WhatsApp Business API |
+| `WHATSAPP_PHONE_NUMBER_ID` | Meta WhatsApp Business phone number ID |
+| `RECEPTIONIST_WHATSAPP_NUMBER` | Receptionist's WhatsApp number (receives booking alerts) |
+| `RECEPTIONIST_PHONE` | Clinic receptionist's direct phone number (used in voice agent fallback) |
 
 > See `.env.example` for a complete template.
 
